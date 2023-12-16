@@ -5,8 +5,8 @@
 
 void my_mv(){
 	 char file[256], new[256];
-	 int i=0;
-	 char text[100000], buf[100000];
+	 int i=0,n;
+	 char text[100], buf[100];
 	 printf("Nom de l'arxiu: ");
 	 scanf("%s", file);
 	 int fd = open(file, O_RDONLY);
@@ -17,11 +17,14 @@ void my_mv(){
 	 printf("Introdueix el nou destí/nom: ");
 	 scanf("%s", new);
 	 int desc=open(new, O_CREAT|O_WRONLY|O_TRUNC, S_IRWXU );
-	 while (n = read(fd, buf, 100000-1) > 0){
-	 	write(new, buf, n);
+	 while ((n = read(fd, buf, 100 - 1)) > 0){
+		//printf("DEBUG: Valor de n: %d", n);
+	 	if(write(desc, buf, n)<0)
+			printf("ERROR: L'arxiu no es pot escriure");
 	 }
-	 int unlink(fd);
-	 close(new);
+	 close(fd);
+	 unlink(file);
+	 close(desc);
 	//FILE *arch = fopen(new, "wt");
 	 //if (arch == NULL){
 	//	 printf("ERROR: No s'ha pogut crear l'arxiu");
