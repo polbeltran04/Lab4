@@ -17,8 +17,7 @@ void my_mv(){
          printf("Introdueix el nou destí/nom: ");
          scanf("%s", new);
          int desc=open(new, O_CREAT|O_WRONLY|O_TRUNC, S_IRWXU );
-         while (n = read(fd, buf, 100000-1) > 0){
-                write(desc, buf, n);
+         while ((n = read(fd, buf, 100000-1)) > 0){
                 if(write(desc, buf, n)<0)
                         printf("ERROR: L'arxiu no es pot escriure");
          }
