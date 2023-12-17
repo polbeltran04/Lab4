@@ -22,7 +22,7 @@ void my_mv(){
                 if(write(desc, buf, n)<0)
                         printf("ERROR: L'arxiu no es pot escriure");
          }
-         int unlink();
+         unlink(file);
          close(fd);
          close(desc);
         //FILE *arch = fopen(new, "wt");
